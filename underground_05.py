@@ -56,13 +56,11 @@ def color_text(text, color):
     
     print(f'\033[{color}m{text}\033[0m')
 
-
-if __name__ == '__main__':
-
+def game():   
+    
     i_am = Unit('Vadim', 100)
     gun = Gun(20)
 
-    print('hello')
     print(f'underground {VERSION}')
     print('Before I begin, I tell you a story.')
     print('')
@@ -82,6 +80,9 @@ if __name__ == '__main__':
             print('|| = ', ammo, '   + =', i_am.health)
         elif action == 'w':
             distance = distance + 1
+            if distance == win_distance:
+                color_text('Congratulations, you escaped from the lair of these creatures!', GREEN)
+                break
             monster_chance = randint(0, 1)
             if monster_chance:
                 monster = monster_spawn()
@@ -92,17 +93,18 @@ if __name__ == '__main__':
                     action = input()
                     if action == 'e' and ammo > 0:
                         print('pow!')
+                        print('|| = ', ammo, '   + =', i_am.health)
                         ammo = ammo - 1
                         monster_is_dead = monster.wound(gun.shot())
                         if monster_is_dead:
-                            color_text('You win!', GREEN)
+                            color_text('You survive!', GREEN)
                             break
 
                         i_am_dead = i_am.wound(monster.kick())
                         if i_am_dead:
                             color_text('You die!', PUPLE)
-                            exit(0)
-                            break
+                            return
+                           
                     if action == 'i':
                         print('|| = ', ammo, '   + =', i_am.health)
 
@@ -110,4 +112,13 @@ if __name__ == '__main__':
         
         else:
             help()
+
+if __name__ == '__main__':
+
+    run = True
+    while run:
+        game()
+        con = input('restart the game? ')
+        if not con in ('yes', 'y'):
+            run = False
         
