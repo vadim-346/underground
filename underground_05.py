@@ -91,15 +91,23 @@ def game():
                 # Fight with a monster
                 while True:
                     action = input()
-                    if action == 'e' and ammo > 0:
-                        print('pow!')
-                        print('|| = ', ammo, '   + =', i_am.health)
-                        ammo = ammo - 1
-                        monster_is_dead = monster.wound(gun.shot())
-                        if monster_is_dead:
-                            color_text('You survive!', GREEN)
-                            break
-
+                    if action == 'e':
+                        if ammo > 0:
+                            print('pow!')
+                            print('|| = ', ammo, '   + =', i_am.health)
+                            ammo = ammo - 1
+                            monster_is_dead = monster.wound(gun.shot())
+                            if monster_is_dead:
+                               color_text('You survive!', GREEN)
+                               break
+                        else:
+                            print('you are out of ammo')
+                            if action == 'e':
+                                print('|| = ', ammo, '   + =', i_am.health)
+                                monster_is_dead = monster.wound(5)
+                                if monster_is_dead:
+                                    color_text('You survive!', GREEN)
+                                    break
                         i_am_dead = i_am.wound(monster.kick())
                         if i_am_dead:
                             color_text('You die!', PUPLE)
@@ -107,7 +115,6 @@ def game():
                            
                     if action == 'i':
                         print('|| = ', ammo, '   + =', i_am.health)
-
                     
         
         else:
