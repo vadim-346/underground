@@ -6,7 +6,6 @@ PUPLE = 95
 YELLOW = 93
 GREEN = 92
 BLUE = 94
-
 class Unit():
 
     def __init__(self, name='', health=100, damage=10):
@@ -58,9 +57,14 @@ def color_text(text, color):
 
 def game():   
     
-    i_am = Unit('Vadim', 150)
+    i_am = Unit('Vadim', 100)
     gun = Gun(40)
 
+    
+    print('')
+    print('')
+    print('')
+    print('')
     print(f'underground {VERSION}')
     print('Before I begin, I tell you a story.')
     print('')
@@ -76,6 +80,7 @@ def game():
         sleep(1)
         action = input('>> ')
         
+        
         if action == 'i':
             print('|| = ', ammo, '   + =', i_am.health)
         elif action == 'w':
@@ -88,7 +93,8 @@ def game():
             if monster_chance:
                 monster = monster_spawn()
                 print(f'you met a creature {monster.name}')
-                
+            
+
                 # Fight with a monster
                 while True:
                     action = input()
@@ -113,11 +119,24 @@ def game():
                         if i_am_dead:
                             color_text('You die!', PUPLE)
                             return
-                           
-                    if action == 'i':
-                        print('|| = ', ammo, '   + =', i_am.health)
+            else:
+                loot = randint(0, 8)
+                if loot == 1:
+                    print('LOOT!')
+                    i_am.health = i_am.health + 20
+                    if i_am.health > 100:
+                        i_am.health = 100
+                elif loot == 2:
+                    print('LOOT!')
+                    ammo = ammo + 5
                     
         
+        #cheats
+        elif action == '/win':
+            color_text('Congratulations, you escaped from the lair of these creatures!', GREEN)
+            break
+
+
         else:
             help()
 
@@ -129,4 +148,3 @@ if __name__ == '__main__':
         con = input('restart the game? ')
         if not con in ('yes', 'y'):
             run = False
-        
