@@ -58,8 +58,8 @@ def color_text(text, color):
 
 def game():   
     
-    i_am = Unit('Vadim', 100)
-    gun = Gun(20)
+    i_am = Unit('Vadim', 150)
+    gun = Gun(40)
 
     print(f'underground {VERSION}')
     print('Before I begin, I tell you a story.')
@@ -71,7 +71,7 @@ def game():
     health = 100
     ammo = 30
     distance = 0
-    win_distance = 20
+    win_distance = randint(20, 40)
     while True:
         sleep(1)
         action = input('>> ')
@@ -80,6 +80,7 @@ def game():
             print('|| = ', ammo, '   + =', i_am.health)
         elif action == 'w':
             distance = distance + 1
+            print('distance ', distance)
             if distance == win_distance:
                 color_text('Congratulations, you escaped from the lair of these creatures!', GREEN)
                 break
