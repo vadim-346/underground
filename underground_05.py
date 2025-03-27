@@ -133,8 +133,10 @@ def game():
         
         #cheats
         elif action == '/win':
-            color_text('Congratulations, you escaped from the lair of these creatures!', GREEN)
-            break
+            password = input('password -')
+            if password == 'qwertyuiop':
+                color_text('Congratulations, you escaped from the lair of these creatures!', GREEN)
+                break
 
 
         else:
