@@ -34,7 +34,7 @@ def help():
     print('move - w')
     print('backpack - i')
     print('shot - e')
-
+    print('dodge - a, d, skip - s')
 
 def monster_spawn():\
 
@@ -115,10 +115,23 @@ def game():
                                 if monster_is_dead:
                                     color_text('You survive!', GREEN)
                                     break
-                        i_am_dead = i_am.wound(monster.kick())
-                        if i_am_dead:
-                            color_text('You die!', PUPLE)
-                            return
+                        
+                        uvorot = input('monster attack!')
+                        uvorot_poluchilsya = randint(0, 1)
+                        if uvorot == 'a' and uvorot_poluchilsya == 0:
+                            pass
+                        elif uvorot == 'd' and uvorot_poluchilsya == 1:
+                            pass
+                        elif uvorot == 's':
+                            i_am_dead = i_am.wound(monster.kick())
+                            if i_am_dead:
+                                color_text('You die!', PUPLE)
+                                return
+                        else:
+                            i_am_dead = i_am.wound(monster.kick())
+                            if i_am_dead:
+                                color_text('You die!', PUPLE)
+                                return
             else:
                 loot = randint(0, 8)
                 if loot == 1:
